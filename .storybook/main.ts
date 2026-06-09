@@ -14,5 +14,12 @@ const config = {
   docs: {
     autodocs: "tag",
   },
+  webpackFinal: async (config, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      config.output = config.output || {};
+      config.output.publicPath = '/react-start-template/';
+    }
+    return config;
+  },
 };
 export default config;
