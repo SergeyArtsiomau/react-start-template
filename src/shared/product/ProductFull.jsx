@@ -11,7 +11,7 @@ export function ProductFull({ price, image, categoryName, name, description, cou
         <h2 className="product__name product__name--large">{name}</h2>
         <div className="product__price product__price--large">{price}</div>
         <p className="product__description">{description}</p>
-        <AddToCartButton count={count} />
+        <AddToCartButton count={count} disabled />
       </div>
     </article>
   );

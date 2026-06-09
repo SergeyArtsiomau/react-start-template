@@ -10,7 +10,7 @@ export function Modal({ visible = false, children }) {
     <div className="modal" role="dialog" aria-modal="true">
       <div className="modal__mask" />
       <div className="modal__window">
-        <button type="button" className="modal__close" aria-label="Закрыть">
+        <button type="button" className="modal__close" aria-label="Закрыть" disabled>
           ×
         </button>
         <div className="modal__content">{children}</div>

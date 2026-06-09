@@ -11,7 +11,7 @@ export function CartItem({ name, price, image, quantity = 1 }) {
           {price} × {quantity}
         </p>
       </div>
-      <button type="button" className="cart-item__remove" aria-label="Удалить товар">
+      <button type="button" className="cart-item__remove" aria-label="Удалить товар" disabled>
         Удалить
       </button>
     </article>

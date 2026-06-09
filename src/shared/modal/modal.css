@@ -36,7 +36,7 @@
   color: #374151;
   font-size: 22px;
   line-height: 1;
-  cursor: pointer;
+  cursor: not-allowed;
 }
 
 .modal__content {
