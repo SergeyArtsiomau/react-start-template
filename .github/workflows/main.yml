@@ -42,4 +42,5 @@ jobs:
         with:
           branch: gh-pages
           folder: storybook-static
+          clean: true
           commit-message: "Automatically publish Storybook"

@@ -17,7 +17,7 @@ const config = {
   webpackFinal: async (config, { configType }) => {
     if (configType === 'PRODUCTION') {
       config.output = config.output || {};
-      config.output.publicPath = '/react-start-template/';
+      config.output.publicPath = './';
     }
     return config;
   },
