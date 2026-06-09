@@ -1,25 +1,34 @@
 const config = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "@storybook/preset-scss",
-    "@storybook/addon-mdx-gfm"
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@storybook/preset-scss',
   ],
   framework: {
-    name: "@storybook/react-webpack5",
+    name: '@storybook/react-webpack5',
     options: {},
   },
   docs: {
-    autodocs: "tag",
+    autodocs: 'tag',
   },
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: async (webpackConfig, { configType }) => {
     if (configType === 'PRODUCTION') {
-      config.output = config.output || {};
-      config.output.publicPath = './';
+      webpackConfig.output = webpackConfig.output || {};
+      // Относительные пути для GitHub Pages (project site)
+      webpackConfig.output.publicPath = './';
+      // GitHub Pages не отдаёт файлы с символом ~ в имени
+      webpackConfig.optimization = {
+        ...webpackConfig.optimization,
+        runtimeChunk: {
+          name: 'runtime-main',
+        },
+      };
     }
-    return config;
+
+    return webpackConfig;
   },
 };
+
 export default config;
