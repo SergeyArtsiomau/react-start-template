@@ -1,0 +1,15 @@
+{
+  "app": {
+    "title": "FinanceApp",
+    "welcome": "Welcome to the personal finance application"
+  },
+  "demo": {
+    "greeting": "Hello! The interface language is English.",
+    "themeLabel": "Color scheme",
+    "languageLabel": "Language"
+  },
+  "theme": {
+    "light": "Light theme",
+    "dark": "Dark theme"
+  }
+}

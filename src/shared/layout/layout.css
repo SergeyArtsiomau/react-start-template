@@ -1,6 +1,7 @@
 .app-layout {
   min-height: 100vh;
-  background: #f9fafb;
+  background: var(--color-bg, #f9fafb);
+  color: var(--color-text, #111827);
 }
 
 .app-layout__main {
