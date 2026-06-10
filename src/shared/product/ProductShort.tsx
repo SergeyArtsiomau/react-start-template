@@ -1,8 +1,13 @@
 import React from 'react';
+import type { ProductBaseProps } from '../types/ui';
 import { AddToCartButton } from './AddToCartButton';
 import './product.css';
 
-export function ProductShort({ price, image, name, description, count = 0 }) {
+export interface ProductShortProps extends ProductBaseProps {
+  count?: number;
+}
+
+export function ProductShort({ price, image, name, description, count = 0 }: ProductShortProps) {
   return (
     <article className="product product--short">
       <img className="product__image" src={image} alt={name} />

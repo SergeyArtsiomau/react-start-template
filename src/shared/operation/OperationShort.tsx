@@ -1,7 +1,10 @@
 import React from 'react';
+import type { OperationBaseProps } from '../types/ui';
 import './operation.css';
 
-export function OperationShort({ amount, categoryName, name, description }) {
+export type OperationShortProps = OperationBaseProps;
+
+export function OperationShort({ amount, categoryName, name, description }: OperationShortProps) {
   return (
     <article className="operation operation--short">
       <div className="operation__top">

@@ -1,6 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { ProductShort } from './ProductShort';
 
-export default {
+const meta: Meta<typeof ProductShort> = {
   title: 'Shop/ProductShort',
   component: ProductShort,
   tags: ['autodocs'],
@@ -13,7 +14,11 @@ export default {
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof ProductShort>;
+
+export const Default: Story = {
   args: {
     price: '2 490 ₽',
     image: 'https://picsum.photos/seed/product-short/400/300',

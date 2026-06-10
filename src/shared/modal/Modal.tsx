@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import './modal.css';
 
-export function Modal({ visible = false, children }) {
+export interface ModalProps {
+  visible?: boolean;
+  children?: ReactNode;
+}
+
+export function Modal({ visible = false, children }: ModalProps) {
   if (!visible) {
     return null;
   }

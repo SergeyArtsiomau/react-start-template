@@ -1,6 +1,8 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Header } from './Header';
 
-export default {
+const meta: Meta<typeof Header> = {
   title: 'Components/Header',
   component: Header,
   tags: ['autodocs'],
@@ -13,14 +15,18 @@ export default {
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof Header>;
+
+export const Default: Story = {
   args: {
     logoTitle: 'FinanceApp',
     children: <span style={{ color: '#6b7280', fontSize: 14 }}>Навигация</span>,
   },
 };
 
-export const StickyScroll = {
+export const StickyScroll: Story = {
   render: (args) => (
     <div>
       <Header {...args} />

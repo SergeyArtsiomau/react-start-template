@@ -1,7 +1,14 @@
 import React from 'react';
 import './product.css';
 
-export function CartItem({ name, price, image, quantity = 1 }) {
+export interface CartItemProps {
+  name: string;
+  price: string;
+  image: string;
+  quantity?: number;
+}
+
+export function CartItem({ name, price, image, quantity = 1 }: CartItemProps) {
   return (
     <article className="cart-item">
       <img className="cart-item__image" src={image} alt={name} />

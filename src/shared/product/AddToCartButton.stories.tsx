@@ -1,6 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { AddToCartButton } from './AddToCartButton';
 
-export default {
+const meta: Meta<typeof AddToCartButton> = {
   title: 'Shop/AddToCartButton',
   component: AddToCartButton,
   tags: ['autodocs'],
@@ -10,14 +11,18 @@ export default {
   },
 };
 
-export const Empty = {
+export default meta;
+
+type Story = StoryObj<typeof AddToCartButton>;
+
+export const Empty: Story = {
   args: {
     count: 0,
     disabled: false,
   },
 };
 
-export const WithCount = {
+export const WithCount: Story = {
   args: {
     count: 3,
     disabled: false,

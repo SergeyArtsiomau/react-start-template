@@ -1,6 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { OperationFull } from './OperationFull';
 
-export default {
+const meta: Meta<typeof OperationFull> = {
   title: 'Finance/OperationFull',
   component: OperationFull,
   tags: ['autodocs'],
@@ -13,7 +14,11 @@ export default {
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof OperationFull>;
+
+export const Default: Story = {
   args: {
     amount: '+ 85 000 ₽',
     categoryName: 'Доход',

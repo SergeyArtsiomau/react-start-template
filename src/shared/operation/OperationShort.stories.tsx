@@ -1,6 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { OperationShort } from './OperationShort';
 
-export default {
+const meta: Meta<typeof OperationShort> = {
   title: 'Finance/OperationShort',
   component: OperationShort,
   tags: ['autodocs'],
@@ -12,7 +13,11 @@ export default {
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof OperationShort>;
+
+export const Default: Story = {
   args: {
     amount: '− 1 250 ₽',
     categoryName: 'Продукты',

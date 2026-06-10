@@ -1,6 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { CartItem } from './CartItem';
 
-export default {
+const meta: Meta<typeof CartItem> = {
   title: 'Shop/CartItem',
   component: CartItem,
   tags: ['autodocs'],
@@ -12,7 +13,11 @@ export default {
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof CartItem>;
+
+export const Default: Story = {
   args: {
     name: 'Кофеварка',
     price: '4 590 ₽',

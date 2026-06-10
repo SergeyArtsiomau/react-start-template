@@ -1,6 +1,8 @@
+import React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { Layout } from './Layout';
 
-export default {
+const meta: Meta<typeof Layout> = {
   title: 'Components/Layout',
   component: Layout,
   tags: ['autodocs'],
@@ -14,7 +16,11 @@ export default {
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof Layout>;
+
+export const Default: Story = {
   args: {
     logoTitle: 'FinanceApp',
     headerContent: <span style={{ color: '#6b7280', fontSize: 14 }}>Меню</span>,

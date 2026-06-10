@@ -1,7 +1,12 @@
 import React from 'react';
+import type { OperationBaseProps } from '../types/ui';
 import './operation.css';
 
-export function OperationFull({ amount, categoryName, name, description, date }) {
+export interface OperationFullProps extends OperationBaseProps {
+  date: string;
+}
+
+export function OperationFull({ amount, categoryName, name, description, date }: OperationFullProps) {
   return (
     <article className="operation operation--full">
       <div className="operation__top">

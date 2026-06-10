@@ -1,6 +1,7 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import { ProductFull } from './ProductFull';
 
-export default {
+const meta: Meta<typeof ProductFull> = {
   title: 'Shop/ProductFull',
   component: ProductFull,
   tags: ['autodocs'],
@@ -14,7 +15,11 @@ export default {
   },
 };
 
-export const Default = {
+export default meta;
+
+type Story = StoryObj<typeof ProductFull>;
+
+export const Default: Story = {
   args: {
     price: '12 990 ₽',
     image: 'https://picsum.photos/seed/product-full/600/500',

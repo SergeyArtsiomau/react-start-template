@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Logo } from '../logo/Logo';
 import './header.css';
 
-export function Header({ logoTitle = 'FinanceApp', children }) {
+export interface HeaderProps {
+  logoTitle?: string;
+  children?: ReactNode;
+}
+
+export function Header({ logoTitle = 'FinanceApp', children }: HeaderProps) {
   return (
     <header className="app-header">
       <div className="app-header__inner">

@@ -1,8 +1,14 @@
 import React from 'react';
+import type { ProductBaseProps } from '../types/ui';
 import { AddToCartButton } from './AddToCartButton';
 import './product.css';
 
-export function ProductFull({ price, image, categoryName, name, description, count = 0 }) {
+export interface ProductFullProps extends ProductBaseProps {
+  categoryName: string;
+  count?: number;
+}
+
+export function ProductFull({ price, image, categoryName, name, description, count = 0 }: ProductFullProps) {
   return (
     <article className="product product--full">
       <img className="product__image product__image--large" src={image} alt={name} />
