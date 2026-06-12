@@ -1,18 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
+import { PatternsDemo } from '../homeworks/patterns/PatternsDemo';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Текст писать тут
-        </p>
-      </header>
-    </div>
-  );
+  return <PatternsDemo />;
 }
 
 export default App;

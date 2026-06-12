@@ -1,0 +1,33 @@
+.timer {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.timer__display {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.timer__controls {
+  display: flex;
+  gap: 8px;
+}
+
+.timer__controls button {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.timer__controls button:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+}
