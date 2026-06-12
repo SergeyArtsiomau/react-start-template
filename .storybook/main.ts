@@ -1,3 +1,5 @@
+import path from 'path';
+
 const config = {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
@@ -14,6 +16,12 @@ const config = {
     autodocs: 'tag',
   },
   webpackFinal: async (webpackConfig, { configType }) => {
+    webpackConfig.resolve = webpackConfig.resolve || {};
+    webpackConfig.resolve.alias = {
+      ...webpackConfig.resolve.alias,
+      src: path.join(__dirname, '../src'),
+    };
+
     if (configType === 'PRODUCTION') {
       webpackConfig.output = webpackConfig.output || {};
       // Относительные пути для GitHub Pages (project site)

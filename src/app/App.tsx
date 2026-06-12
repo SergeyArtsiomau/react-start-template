@@ -1,17 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AuthProvider } from 'src/features/auth';
+import { FormsApp } from './FormsApp';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Текст писать тут
-        </p>
-      </header>
-    </div>
+    <AuthProvider>
+      <FormsApp />
+    </AuthProvider>
   );
 }
 
