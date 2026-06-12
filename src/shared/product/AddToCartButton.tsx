@@ -7,7 +7,7 @@ export interface AddToCartButtonProps {
 }
 
 export function AddToCartButton({ count = 0, disabled = false }: AddToCartButtonProps) {
-  if (count <= 0) {
+  if (!count) {
     return (
       <button type="button" className="add-to-cart add-to-cart--button" disabled={disabled}>
         В корзину

@@ -3,12 +3,12 @@ import { Header } from '../header/Header';
 import './layout.css';
 
 export interface LayoutProps {
-  logoTitle?: string;
-  headerContent?: ReactNode;
-  children?: ReactNode;
+  logoTitle: string;
+  headerContent: ReactNode;
+  children: ReactNode;
 }
 
-export function Layout({ logoTitle = 'FinanceApp', headerContent, children }: LayoutProps) {
+export function Layout({ logoTitle, headerContent, children }: LayoutProps) {
   return (
     <div className="app-layout">
       <Header logoTitle={logoTitle}>{headerContent}</Header>
