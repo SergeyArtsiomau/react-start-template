@@ -1,4 +1,5 @@
 import React from 'react';
+import { CroppedText } from '../cropped-text/CroppedText';
 import type { ProductBaseProps } from '../types/ui';
 import { AddToCartButton } from './AddToCartButton';
 import './product.css';
@@ -14,7 +15,9 @@ export function ProductShort({ price, image, name, description, count = 0 }: Pro
       <div className="product__body">
         <div className="product__price">{price}</div>
         <h3 className="product__name">{name}</h3>
-        <p className="product__description product__description--short">{description}</p>
+        <CroppedText className="product__description product__description--short" opened={false} rows={2}>
+          {description}
+        </CroppedText>
         <AddToCartButton count={count} disabled />
       </div>
     </article>

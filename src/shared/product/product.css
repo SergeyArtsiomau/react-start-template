@@ -75,10 +75,7 @@
 }
 
 .product__description--short {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  min-height: 1.5em;
 }
 
 .add-to-cart--button:disabled,
