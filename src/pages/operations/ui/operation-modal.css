@@ -1,0 +1,8 @@
+.operation-modal__form {
+  box-shadow: none;
+  padding: 0;
+}
+
+.operation-modal__form .form-panel__title {
+  margin-top: 0;
+}

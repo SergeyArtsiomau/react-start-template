@@ -24,10 +24,8 @@ export const ProfileFormPanel = memo<ProfileFormPanelProps>(
       initialValues,
       enableReinitialize: true,
       validate: validateProfileForm,
-      onSubmit: (values, { resetForm }) => {
-        console.log('ProfileForm submit:', values);
+      onSubmit: (values) => {
         onSubmitSuccess?.(values);
-        resetForm();
       },
     });
 

@@ -1,15 +1,28 @@
 import React from 'react';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'src/shared/layout/Layout';
 import { AuthFormPanel } from 'src/features/forms/AuthForm';
-import { ProfileFormPanel } from 'src/features/forms/ProfileForm';
-import { OperationFormPanel } from 'src/features/forms/OperationForm';
 import { useAuth } from 'src/features/auth';
+import { AppNavigation } from 'src/widgets/app-navigation';
+import { AppRoutes } from './AppRoutes';
+import { ROUTES } from 'src/shared/config/routes';
 import './forms-app.css';
 
 export function FormsApp() {
-  const { user, login, register, logout, updateProfile } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user, login, register, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate(ROUTES.ROOT, { replace: true });
+  };
 
   if (!user) {
+    if (location.pathname !== ROUTES.ROOT) {
+      return <Navigate to={ROUTES.ROOT} replace />;
+    }
+
     return (
       <Layout
         logoTitle="FinanceApp"
@@ -33,19 +46,10 @@ export function FormsApp() {
   return (
     <Layout
       logoTitle="FinanceApp"
-      headerContent={
-        <div className="forms-app__header">
-          <span className="forms-app__user">{user.email}</span>
-          <button type="button" className="forms-app__logout" onClick={logout}>
-            Выйти
-          </button>
-        </div>
-      }
+      logoTo={ROUTES.OPERATIONS}
+      headerContent={<AppNavigation userEmail={user.email} onLogout={handleLogout} />}
     >
-      <div className="forms-app forms-app--authenticated">
-        <ProfileFormPanel initialValues={user.profile} onSubmitSuccess={updateProfile} />
-        <OperationFormPanel />
-      </div>
+      <AppRoutes />
     </Layout>
   );
 }

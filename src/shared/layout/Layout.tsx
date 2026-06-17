@@ -4,14 +4,17 @@ import './layout.css';
 
 export interface LayoutProps {
   logoTitle: string;
+  logoTo?: string;
   headerContent: ReactNode;
   children: ReactNode;
 }
 
-export function Layout({ logoTitle, headerContent, children }: LayoutProps) {
+export function Layout({ logoTitle, logoTo, headerContent, children }: LayoutProps) {
   return (
     <div className="app-layout">
-      <Header logoTitle={logoTitle}>{headerContent}</Header>
+      <Header logoTitle={logoTitle} logoTo={logoTo}>
+        {headerContent}
+      </Header>
       <main className="app-layout__main">{children}</main>
     </div>
   );

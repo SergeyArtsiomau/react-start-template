@@ -7,6 +7,7 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
+    "build:gh-pages": "npm run build && npm run build-storybook && node scripts/prepare-gh-pages.js",
     "test": "jest src",
     "lint": "eslint src --fix",
     "storybook": "storybook dev -p 6006",
@@ -67,6 +68,7 @@
     "clsx": "^1.2.1",
     "formik": "^2.4.9",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.18.0"
   }
 }

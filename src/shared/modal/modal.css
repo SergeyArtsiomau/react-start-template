@@ -36,7 +36,15 @@
   color: #374151;
   font-size: 22px;
   line-height: 1;
+  cursor: pointer;
+}
+
+.modal__close:disabled {
   cursor: not-allowed;
+}
+
+.modal__close:not(:disabled):hover {
+  background: #e5e7eb;
 }
 
 .modal__content {

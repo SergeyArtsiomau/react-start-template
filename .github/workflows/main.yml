@@ -34,11 +34,8 @@ jobs:
       - name: Run tests and linter
         run: npm run lint && npm test
 
-      - name: Build Storybook
-        run: npm run build-storybook
-
-      - name: Add .nojekyll
-        run: touch storybook-static/.nojekyll
+      - name: Build for GitHub Pages
+        run: npm run build:gh-pages
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -46,7 +43,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: storybook-static
+          path: dist
 
   deploy:
     needs: build

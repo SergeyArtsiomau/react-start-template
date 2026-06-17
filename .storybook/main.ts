@@ -24,8 +24,8 @@ const config = {
 
     if (configType === 'PRODUCTION') {
       webpackConfig.output = webpackConfig.output || {};
-      // Относительные пути для GitHub Pages (project site)
-      webpackConfig.output.publicPath = './';
+      // Storybook публикуется в подкаталоге /storybook/ на GitHub Pages
+      webpackConfig.output.publicPath = '/react-start-template/storybook/';
       // GitHub Pages не отдаёт файлы с символом ~ в имени
       webpackConfig.optimization = {
         ...webpackConfig.optimization,

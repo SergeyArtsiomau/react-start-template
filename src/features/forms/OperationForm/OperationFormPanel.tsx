@@ -3,6 +3,7 @@ import cn from 'clsx';
 import { useFormik } from 'formik';
 import { OperationForm } from './OperationForm';
 import type { OperationFormValues } from './types';
+import { EMPTY_OPERATION_FORM_VALUES } from './types';
 import { validateOperationForm } from './validateOperationForm';
 import '../forms.css';
 
@@ -12,24 +13,30 @@ export type OperationFormPanelProps = {
   title?: string;
   submitLabel?: string;
   initialValues?: OperationFormValues;
+  onSubmitSuccess?: (values: OperationFormValues) => void;
 };
 
-const defaultValues: OperationFormValues = {
-  name: '',
-  amount: '',
-  categoryName: '',
-  description: '',
-};
+const defaultValues = EMPTY_OPERATION_FORM_VALUES;
 
 export const OperationFormPanel = memo<OperationFormPanelProps>(
-  ({ className, disabled, title = 'Операция', submitLabel = 'Сохранить операцию', initialValues = defaultValues }) => {
+  ({
+    className,
+    disabled,
+    title = 'Операция',
+    submitLabel = 'Сохранить операцию',
+    initialValues = defaultValues,
+    onSubmitSuccess,
+  }) => {
     const formManager = useFormik<OperationFormValues>({
       initialValues,
       enableReinitialize: true,
       validate: validateOperationForm,
       onSubmit: (values, { resetForm }) => {
-        console.log('OperationForm submit:', values);
-        resetForm();
+        onSubmitSuccess?.(values);
+
+        if (!onSubmitSuccess) {
+          resetForm();
+        }
       },
     });
 

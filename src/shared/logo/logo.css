@@ -4,6 +4,14 @@
   gap: 10px;
 }
 
+.logo--link {
+  text-decoration: none;
+}
+
+.logo--link:hover .logo__title {
+  color: #4f46e5;
+}
+
 .logo__mark {
   width: 36px;
   height: 36px;

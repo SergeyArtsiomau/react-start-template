@@ -31,8 +31,7 @@ module.exports = (_, args) => {
     entry: './index.tsx',
     output: {
       path: dist,
-      publicPath:
-        args.mode === 'development' ? `http://${host}:${port}/` : undefined /* <- прописать данные своего github */,
+      publicPath: args.mode === 'development' ? `http://${host}:${port}/` : '/react-start-template/',
       filename: `js/[name].js`,
       chunkFilename: `js/[name].js`,
     },

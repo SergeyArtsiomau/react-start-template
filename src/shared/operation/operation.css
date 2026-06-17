@@ -55,12 +55,23 @@
 }
 
 .operation__edit {
+  display: inline-block;
   margin-top: 16px;
   padding: 10px 16px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   background: #f9fafb;
-  color: #6b7280;
+  color: #111827;
   font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.operation__edit:disabled {
+  color: #6b7280;
   cursor: not-allowed;
+}
+
+.operation__edit:not(:disabled):hover {
+  background: #f3f4f6;
 }
