@@ -6,9 +6,25 @@ import './product.css';
 
 export interface ProductShortProps extends ProductBaseProps {
   count?: number;
+  disabled?: boolean;
+  onAdd?: () => void;
+  onIncrement?: () => void;
+  onDecrement?: () => void;
 }
 
-export function ProductShort({ price, image, name, description, count = 0 }: ProductShortProps) {
+export function ProductShort({
+  price,
+  image,
+  name,
+  description,
+  count = 0,
+  disabled = false,
+  onAdd,
+  onIncrement,
+  onDecrement,
+}: ProductShortProps) {
+  const isDisabled = disabled || !onAdd;
+
   return (
     <article className="product product--short">
       <img className="product__image" src={image} alt={name} />
@@ -18,7 +34,13 @@ export function ProductShort({ price, image, name, description, count = 0 }: Pro
         <CroppedText className="product__description product__description--short" opened={false} rows={2}>
           {description}
         </CroppedText>
-        <AddToCartButton count={count} disabled />
+        <AddToCartButton
+          count={count}
+          disabled={isDisabled}
+          onAdd={onAdd}
+          onIncrement={onIncrement}
+          onDecrement={onDecrement}
+        />
       </div>
     </article>
   );

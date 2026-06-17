@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'src/app/store';
-import { addOperation, selectAllOperations, updateOperation } from './model/operationsSlice';
+import { addOperation, selectAllOperations, selectOperationById, updateOperation } from './model/operationsSlice';
 import type { OperationFormValues } from 'src/features/forms/OperationForm';
 
 export function useOperations() {
