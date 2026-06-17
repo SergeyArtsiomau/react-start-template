@@ -1,10 +1,13 @@
 import React from 'react';
 import { OperationFull } from 'src/shared/operation/OperationFull';
 import { formatOperationAmount, useOperations } from 'src/entities/operation';
+import { useAppSelector } from 'src/app/store';
+import { selectIsAdmin } from 'src/features/auth/model/authSlice';
 import { ROUTES } from 'src/shared/config/routes';
 import './operation-list.css';
 
 export function OperationList() {
+  const isAdmin = useAppSelector(selectIsAdmin);
   const { operations } = useOperations();
 
   if (operations.length === 0) {
@@ -21,7 +24,7 @@ export function OperationList() {
             name={operation.name}
             description={operation.description}
             date={operation.date}
-            editTo={ROUTES.operationEdit(operation.id)}
+            editTo={isAdmin ? ROUTES.operationEdit(operation.id) : undefined}
           />
         </li>
       ))}

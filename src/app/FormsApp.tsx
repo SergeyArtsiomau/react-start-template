@@ -3,6 +3,9 @@ import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Layout } from 'src/shared/layout/Layout';
 import { AuthFormPanel } from 'src/features/forms/AuthForm';
 import { useAuth } from 'src/features/auth';
+import { useAppSelector } from 'src/app/store';
+import { selectIsAuthenticated } from 'src/features/auth/model/authSlice';
+import { selectIsInitialized } from 'src/app/model/appSlice';
 import { AppNavigation } from 'src/widgets/app-navigation';
 import { AppRoutes } from './AppRoutes';
 import { ROUTES } from 'src/shared/config/routes';
@@ -11,6 +14,8 @@ import './forms-app.css';
 export function FormsApp() {
   const navigate = useNavigate();
   const location = useLocation();
+  const initialized = useAppSelector(selectIsInitialized);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
   const { user, login, register, logout } = useAuth();
 
   const handleLogout = () => {
@@ -18,7 +23,11 @@ export function FormsApp() {
     navigate(ROUTES.ROOT, { replace: true });
   };
 
-  if (!user) {
+  if (!initialized) {
+    return null;
+  }
+
+  if (!isAuthenticated) {
     if (location.pathname !== ROUTES.ROOT) {
       return <Navigate to={ROUTES.ROOT} replace />;
     }
@@ -38,6 +47,7 @@ export function FormsApp() {
               }
             }}
           />
+          <p className="forms-app__admin-hint">Для редактирования операций войдите как admin@example.com</p>
         </div>
       </Layout>
     );
@@ -47,7 +57,7 @@ export function FormsApp() {
     <Layout
       logoTitle="FinanceApp"
       logoTo={ROUTES.OPERATIONS}
-      headerContent={<AppNavigation userEmail={user.email} onLogout={handleLogout} />}
+      headerContent={<AppNavigation userEmail={user?.email ?? ''} onLogout={handleLogout} />}
     >
       <AppRoutes />
     </Layout>
