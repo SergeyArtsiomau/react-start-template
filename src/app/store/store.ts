@@ -2,6 +2,7 @@ import { configureStore, createListenerMiddleware, isAnyOf } from '@reduxjs/tool
 import { setSession, clearSession } from 'src/features/auth/model/authSlice';
 import { loginThunk, logoutThunk, registerThunk } from 'src/features/auth/model/authThunks';
 import { writeTokenToStorage, removeTokenFromStorage } from 'src/shared/lib/tokenStorage';
+import { signupApi } from 'src/shared/api/signupApi';
 import { rootReducer, type RootState } from './rootReducer';
 
 export const tokenStorageListener = createListenerMiddleware();
@@ -29,7 +30,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: true,
-    }).prepend(tokenStorageListener.middleware),
+    })
+      .prepend(tokenStorageListener.middleware)
+      .concat(signupApi.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

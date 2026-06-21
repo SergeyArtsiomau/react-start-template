@@ -4,6 +4,7 @@ export const ROUTES = {
   OPERATIONS: '/operations',
   PRODUCTS: '/products',
   CART: '/cart',
+  REGISTRATION: '/registration',
   OPERATIONS_NEW: '/operations/new',
   operationEdit: (operationId: string) => `/operations/${operationId}/edit`,
 } as const;
