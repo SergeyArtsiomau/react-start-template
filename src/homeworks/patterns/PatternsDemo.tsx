@@ -8,6 +8,8 @@ import { UserBalance } from './hoc/UserBalance';
 import { UserBalanceBefore } from './hoc/UserBalanceBefore';
 import { OperationStatsContainer } from './operation-stats/OperationStatsContainer';
 import { OperationStatsBefore } from './operation-stats/OperationStatsBefore';
+import { OperationListMemo } from './memoization/OperationListMemo';
+import { OperationListMemoBefore } from './memoization/OperationListMemoBefore';
 import { Timer } from './timer/Timer';
 import { TimerBefore } from './timer/TimerBefore';
 import './patterns.css';
@@ -46,7 +48,10 @@ function PatternSection({
 
 export function PatternsDemo() {
   return (
-    <Layout logoTitle="FinanceApp" headerContent={<span style={{ color: '#6b7280', fontSize: 14 }}>Паттерны React</span>}>
+    <Layout
+      logoTitle="FinanceApp"
+      headerContent={<span style={{ color: '#6b7280', fontSize: 14 }}>Паттерны React</span>}
+    >
       <div className="patterns-demo">
         <PatternSection
           pattern="Compound Components"
@@ -98,6 +103,13 @@ export function PatternsDemo() {
               <OperationFilter.List />
             </OperationFilter>
           }
+        />
+        <PatternSection
+          pattern="Memoization"
+          title="Список операций"
+          note="useMemo кэширует отсортированный список, useCallback стабилизирует обработчик, memo предотвращает лишние перерисовки."
+          before={<OperationListMemoBefore />}
+          after={<OperationListMemo />}
         />
       </div>
     </Layout>
