@@ -16,8 +16,12 @@ interface CroppedTextStoryProps extends CroppedTextProps {
 function CroppedTextStory({ resizable = true, ...props }: CroppedTextStoryProps) {
   return (
     <ComponentDescription title="CroppedText" description={COMPONENT_DESCRIPTION}>
-      <div className={resizable ? 'cropped-text-demo__panel' : 'cropped-text-demo__panel cropped-text-demo__panel--fixed'}>
-        <p className="cropped-text-demo__label">{resizable ? 'Потяните за правый край блока' : 'Фиксированная ширина'}</p>
+      <div
+        className={resizable ? 'cropped-text-demo__panel' : 'cropped-text-demo__panel cropped-text-demo__panel--fixed'}
+      >
+        <p className="cropped-text-demo__label">
+          {resizable ? 'Потяните за правый край блока' : 'Фиксированная ширина'}
+        </p>
         <CroppedText {...props} />
       </div>
     </ComponentDescription>

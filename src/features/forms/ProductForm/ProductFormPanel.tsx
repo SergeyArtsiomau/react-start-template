@@ -1,44 +1,40 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { useFormik } from 'formik';
-import { OperationForm } from './OperationForm';
-import type { OperationFormValues } from './types';
-import { EMPTY_OPERATION_FORM_VALUES } from './types';
-import { validateOperationForm } from './validateOperationForm';
+import { ProductForm } from './ProductForm';
+import type { ProductFormValues } from './types';
+import { EMPTY_PRODUCT_FORM_VALUES } from './types';
+import { validateProductForm } from './validateProductForm';
 import '../forms.css';
 
-export type OperationFormPanelProps = {
+export type ProductFormPanelProps = {
   className?: string;
   disabled?: boolean;
   title?: string;
   submitLabel?: string;
-  initialValues?: OperationFormValues;
+  initialValues?: ProductFormValues;
   categories?: Array<{ id: string; name: string }>;
   serverError?: string | null;
-  onSubmitSuccess?: (values: OperationFormValues) => void;
+  onSubmitSuccess?: (values: ProductFormValues) => void;
 };
 
-export const OperationFormPanel = memo<OperationFormPanelProps>(
+export const ProductFormPanel = memo<ProductFormPanelProps>(
   ({
     className,
     disabled,
-    title = 'Операция',
-    submitLabel = 'Сохранить операцию',
-    initialValues = EMPTY_OPERATION_FORM_VALUES,
+    title = 'Товар',
+    submitLabel = 'Сохранить товар',
+    initialValues = EMPTY_PRODUCT_FORM_VALUES,
     categories = [],
     serverError,
     onSubmitSuccess,
   }) => {
-    const formManager = useFormik<OperationFormValues>({
+    const formManager = useFormik<ProductFormValues>({
       initialValues,
       enableReinitialize: true,
-      validate: validateOperationForm,
-      onSubmit: (values, { resetForm }) => {
+      validate: validateProductForm,
+      onSubmit: (values) => {
         onSubmitSuccess?.(values);
-
-        if (!onSubmitSuccess) {
-          resetForm();
-        }
       },
     });
 
@@ -46,7 +42,7 @@ export const OperationFormPanel = memo<OperationFormPanelProps>(
       <div className={cn('form-panel', className)}>
         <h2 className="form-panel__title">{title}</h2>
         {serverError && <p className="form-panel__error">{serverError}</p>}
-        <OperationForm formManager={formManager} disabled={disabled} categories={categories} />
+        <ProductForm formManager={formManager} disabled={disabled} categories={categories} />
         <button
           type="button"
           className="form-panel__submit"
@@ -60,4 +56,4 @@ export const OperationFormPanel = memo<OperationFormPanelProps>(
   }
 );
 
-OperationFormPanel.displayName = 'OperationFormPanel';
+ProductFormPanel.displayName = 'ProductFormPanel';

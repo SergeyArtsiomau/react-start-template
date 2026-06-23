@@ -2,14 +2,14 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { FormItem } from 'src/shared/ui/FormItem';
 import { getValidates } from 'src/utils/validation';
-import type { OperationFormProps } from './types';
+import type { ProductFormProps } from './types';
 
-export const OperationForm = memo<OperationFormProps>(
+export const ProductForm = memo<ProductFormProps>(
   ({ className, formManager, formElement, disabled, categories = [] }) => {
     const { values, touched, errors, submitCount, handleBlur, handleSubmit, handleChange, setFieldValue } = formManager;
 
     const nameValidation = getValidates(errors.name, touched.name, submitCount);
-    const amountValidation = getValidates(errors.amount, touched.amount, submitCount);
+    const priceValidation = getValidates(errors.price, touched.price, submitCount);
     const categoryValidation = getValidates(errors.categoryId, touched.categoryId, submitCount);
     const descriptionValidation = getValidates(errors.description, touched.description, submitCount);
 
@@ -22,25 +22,18 @@ export const OperationForm = memo<OperationFormProps>(
             value={values.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Покупка в супермаркете"
+            placeholder="Ноутбук"
           />
         </FormItem>
 
-        <FormItem title="Тип" required validateStatus="" help="">
-          <select disabled={disabled} name="type" value={values.type} onChange={handleChange} onBlur={handleBlur}>
-            <option value="Cost">Расход</option>
-            <option value="Profit">Доход</option>
-          </select>
-        </FormItem>
-
-        <FormItem title="Сумма" required validateStatus={amountValidation.validateStatus} help={amountValidation.help}>
+        <FormItem title="Цена" required validateStatus={priceValidation.validateStatus} help={priceValidation.help}>
           <input
             disabled={disabled}
-            name="amount"
-            value={values.amount}
+            name="price"
+            value={values.price}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="1250"
+            placeholder="2490"
           />
         </FormItem>
 
@@ -66,6 +59,17 @@ export const OperationForm = memo<OperationFormProps>(
           </select>
         </FormItem>
 
+        <FormItem title="Фото (URL)" validateStatus="" help="">
+          <input
+            disabled={disabled}
+            name="image"
+            value={values.image}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            placeholder="https://..."
+          />
+        </FormItem>
+
         <FormItem
           title="Описание"
           validateStatus={descriptionValidation.validateStatus}
@@ -78,7 +82,7 @@ export const OperationForm = memo<OperationFormProps>(
             value={values.description}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Комментарий к операции"
+            placeholder="Описание товара"
           />
         </FormItem>
       </form>
@@ -86,4 +90,4 @@ export const OperationForm = memo<OperationFormProps>(
   }
 );
 
-OperationForm.displayName = 'OperationForm';
+ProductForm.displayName = 'ProductForm';

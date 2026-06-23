@@ -4,6 +4,7 @@ import type { Operation } from '../model/types';
 export const mapOperationToFormValues = (operation: Operation): OperationFormValues => ({
   name: operation.name,
   amount: operation.amount,
-  categoryName: operation.categoryName,
+  categoryId: '',
   description: operation.description,
+  type: 'Cost',
 });
