@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type ReactNode } from 'react';
+import React, { useEffect, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import './modal.css';
 
@@ -9,15 +9,9 @@ export interface ModalProps {
 }
 
 export function Modal({ visible, children, onClose }: ModalProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   useEffect(() => {
     if (!visible) {
-      return undefined;
+      return;
     }
 
     const previousOverflow = document.body.style.overflow;
@@ -28,7 +22,7 @@ export function Modal({ visible, children, onClose }: ModalProps) {
     };
   }, [visible]);
 
-  if (!visible || !mounted) {
+  if (!visible) {
     return null;
   }
 
@@ -46,18 +40,12 @@ export function Modal({ visible, children, onClose }: ModalProps) {
         disabled={!onClose}
       />
       <div className="modal__window">
-        <button
-          type="button"
-          className="modal__close"
-          aria-label="Закрыть"
-          onClick={onClose}
-          disabled={!onClose}
-        >
+        <button type="button" className="modal__close" aria-label="Закрыть" onClick={onClose} disabled={!onClose}>
           ×
         </button>
         <div className="modal__content">{children}</div>
       </div>
     </div>,
-    document.body,
+    document.body
   );
 }

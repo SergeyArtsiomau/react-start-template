@@ -2,11 +2,11 @@ import React from 'react';
 import './product.css';
 
 export interface AddToCartButtonProps {
-  count?: number;
+  count: number;
   disabled?: boolean;
 }
 
-export function AddToCartButton({ count = 0, disabled = false }: AddToCartButtonProps) {
+export function AddToCartButton({ count, disabled = false }: AddToCartButtonProps) {
   if (!count) {
     return (
       <button type="button" className="add-to-cart add-to-cart--button" disabled={disabled}>

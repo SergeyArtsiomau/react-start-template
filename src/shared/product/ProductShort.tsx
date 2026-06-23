@@ -4,10 +4,10 @@ import { AddToCartButton } from './AddToCartButton';
 import './product.css';
 
 export interface ProductShortProps extends ProductBaseProps {
-  count?: number;
+  count: number;
 }
 
-export function ProductShort({ price, image, name, description, count = 0 }: ProductShortProps) {
+export function ProductShort({ price, image, name, description, count }: ProductShortProps) {
   return (
     <article className="product product--short">
       <img className="product__image" src={image} alt={name} />
