@@ -78,6 +78,12 @@
   min-height: 1.5em;
 }
 
+.add-to-cart--button:not(:disabled),
+.add-to-cart__control:not(:disabled),
+.cart-item__remove:not(:disabled) {
+  cursor: pointer;
+}
+
 .add-to-cart--button:disabled,
 .add-to-cart__control:disabled,
 .cart-item__remove:disabled,
@@ -95,7 +101,6 @@
   color: #ffffff;
   font-size: 14px;
   font-weight: 600;
-  cursor: default;
 }
 
 .add-to-cart--counter {

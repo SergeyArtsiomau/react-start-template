@@ -6,9 +6,10 @@ export interface CartItemProps {
   price: string;
   image: string;
   quantity?: number;
+  onRemove?: () => void;
 }
 
-export function CartItem({ name, price, image, quantity = 1 }: CartItemProps) {
+export function CartItem({ name, price, image, quantity = 1, onRemove }: CartItemProps) {
   return (
     <article className="cart-item">
       <img className="cart-item__image" src={image} alt={name} />
@@ -18,7 +19,13 @@ export function CartItem({ name, price, image, quantity = 1 }: CartItemProps) {
           {price} × {quantity}
         </p>
       </div>
-      <button type="button" className="cart-item__remove" aria-label="Удалить товар" disabled>
+      <button
+        type="button"
+        className="cart-item__remove"
+        aria-label="Удалить товар"
+        disabled={!onRemove}
+        onClick={onRemove}
+      >
         Удалить
       </button>
     </article>
