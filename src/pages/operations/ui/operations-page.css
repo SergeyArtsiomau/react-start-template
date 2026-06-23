@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
 }
 
 .operations-page__title {
@@ -35,4 +35,10 @@
 
 .operations-page__create:hover {
   background: #4338ca;
+}
+
+.operations-page__hint {
+  margin: 0 0 24px;
+  color: #6b7280;
+  font-size: 14px;
 }

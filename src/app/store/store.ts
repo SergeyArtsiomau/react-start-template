@@ -1,13 +1,14 @@
 import { configureStore, createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
-import { setSession, clearSession } from 'src/features/auth/model/authSlice';
+import { setSessionFromProfile, clearSession } from 'src/features/auth/model/authSlice';
 import { loginThunk, logoutThunk, registerThunk } from 'src/features/auth/model/authThunks';
 import { writeTokenToStorage, removeTokenFromStorage } from 'src/shared/lib/tokenStorage';
+import { api } from 'src/shared/api/api';
 import { rootReducer, type RootState } from './rootReducer';
 
 export const tokenStorageListener = createListenerMiddleware();
 
 tokenStorageListener.startListening({
-  matcher: isAnyOf(setSession, loginThunk.fulfilled, registerThunk.fulfilled),
+  matcher: isAnyOf(setSessionFromProfile, loginThunk.fulfilled, registerThunk.fulfilled),
   effect: (_, listenerApi) => {
     const token = (listenerApi.getState() as RootState).auth.token;
 
@@ -29,7 +30,9 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: true,
-    }).prepend(tokenStorageListener.middleware),
+    })
+      .prepend(tokenStorageListener.middleware)
+      .concat(api.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

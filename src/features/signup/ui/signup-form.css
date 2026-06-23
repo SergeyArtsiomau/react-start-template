@@ -1,0 +1,75 @@
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signup-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signup-form__label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.signup-form__input {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.signup-form__input--error {
+  border-color: #ef4444;
+}
+
+.signup-form__submit {
+  margin-top: 4px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup-form__submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.signup-form__errors {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.signup-form__error {
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+.signup-form__error--email {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.signup-form__success {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #ecfdf5;
+  color: #047857;
+  font-size: 13px;
+  word-break: break-all;
+}

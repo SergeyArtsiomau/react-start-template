@@ -13,6 +13,15 @@
   color: #111827;
 }
 
+.form-panel__error {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
 .form-panel__submit {
   margin-top: 8px;
   padding: 10px 20px;

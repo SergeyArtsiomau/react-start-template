@@ -12,7 +12,8 @@ export type AuthFormPanelProps = {
   className?: string;
   disabled?: boolean;
   mode?: AuthMode;
-  onAuth?: (values: AuthFormValues, mode: AuthMode) => void;
+  serverError?: string | null;
+  onAuth?: (values: AuthFormValues, mode: AuthMode) => void | Promise<void>;
 };
 
 const defaultValues: AuthFormValues = {
@@ -21,7 +22,7 @@ const defaultValues: AuthFormValues = {
 };
 
 export const AuthFormPanel = memo<AuthFormPanelProps>(
-  ({ className, disabled, mode: initialMode = 'signIn', onAuth }) => {
+  ({ className, disabled, mode: initialMode = 'signIn', serverError, onAuth }) => {
     const [mode, setMode] = useState<AuthMode>(initialMode);
 
     useEffect(() => {
@@ -31,9 +32,8 @@ export const AuthFormPanel = memo<AuthFormPanelProps>(
     const formManager = useFormik<AuthFormValues>({
       initialValues: defaultValues,
       validate: validateAuthForm,
-      onSubmit: (values, { resetForm }) => {
-        console.log(`AuthForm ${mode}:`, values);
-        onAuth?.(values, mode);
+      onSubmit: async (values, { resetForm }) => {
+        await onAuth?.(values, mode);
         resetForm();
       },
     });
@@ -61,6 +61,7 @@ export const AuthFormPanel = memo<AuthFormPanelProps>(
           </button>
         </div>
 
+        {serverError && <p className="form-panel__error">{serverError}</p>}
         <AuthForm formManager={formManager} disabled={disabled} />
         <button
           type="button"
@@ -68,7 +69,7 @@ export const AuthFormPanel = memo<AuthFormPanelProps>(
           disabled={disabled}
           onClick={() => formManager.submitForm()}
         >
-          {submitLabel}
+          {disabled ? 'Отправка...' : submitLabel}
         </button>
       </div>
     );

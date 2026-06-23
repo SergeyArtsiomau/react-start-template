@@ -1,0 +1,62 @@
+.registration-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.registration-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.registration-page__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.registration-page__back {
+  color: #4f46e5;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.registration-page__back:hover {
+  text-decoration: underline;
+}
+
+.registration-page__hint {
+  margin: 0 0 24px;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.registration-page__grid {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .registration-page__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.registration-page__card {
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.registration-page__card-title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}

@@ -19,6 +19,7 @@ export function OperationsPage() {
           </Link>
         )}
       </div>
+      <p className="operations-page__hint">Список подгружается с сервера при прокрутке.</p>
       <OperationList />
       <Outlet />
     </div>

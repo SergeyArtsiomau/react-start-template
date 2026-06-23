@@ -13,10 +13,10 @@ export type OperationFormPanelProps = {
   title?: string;
   submitLabel?: string;
   initialValues?: OperationFormValues;
+  categories?: Array<{ id: string; name: string }>;
+  serverError?: string | null;
   onSubmitSuccess?: (values: OperationFormValues) => void;
 };
-
-const defaultValues = EMPTY_OPERATION_FORM_VALUES;
 
 export const OperationFormPanel = memo<OperationFormPanelProps>(
   ({
@@ -24,7 +24,9 @@ export const OperationFormPanel = memo<OperationFormPanelProps>(
     disabled,
     title = 'Операция',
     submitLabel = 'Сохранить операцию',
-    initialValues = defaultValues,
+    initialValues = EMPTY_OPERATION_FORM_VALUES,
+    categories = [],
+    serverError,
     onSubmitSuccess,
   }) => {
     const formManager = useFormik<OperationFormValues>({
@@ -43,7 +45,8 @@ export const OperationFormPanel = memo<OperationFormPanelProps>(
     return (
       <div className={cn('form-panel', className)}>
         <h2 className="form-panel__title">{title}</h2>
-        <OperationForm formManager={formManager} disabled={disabled} />
+        {serverError && <p className="form-panel__error">{serverError}</p>}
+        <OperationForm formManager={formManager} disabled={disabled} categories={categories} />
         <button
           type="button"
           className="form-panel__submit"

@@ -8,37 +8,35 @@ type OperationFormStoryArgs = {
   submitLabel: string;
   name: string;
   amount: string;
-  categoryName: string;
+  categoryId: string;
   description: string;
+  type: 'Profit' | 'Cost';
 };
 
 const meta: Meta<OperationFormStoryArgs> = {
   title: 'Forms/OperationForm',
   component: OperationFormPanel,
   tags: ['autodocs'],
-  parameters: {
-    docs: {
-      description: {
-        component:
-          'Форма добавления/редактирования операции. При отправке данные выводятся в консоль, форма очищается.',
-      },
-    },
-  },
   argTypes: {
     disabled: { control: 'boolean' },
     title: { control: 'text' },
     submitLabel: { control: 'text' },
     name: { control: 'text' },
     amount: { control: 'text' },
-    categoryName: { control: 'text' },
+    categoryId: { control: 'text' },
     description: { control: 'text' },
+    type: { control: 'select', options: ['Profit', 'Cost'] },
   },
-  render: ({ disabled, title, submitLabel, name, amount, categoryName, description }) => (
+  render: ({ disabled, title, submitLabel, name, amount, categoryId, description, type }) => (
     <OperationFormPanel
       disabled={disabled}
       title={title}
       submitLabel={submitLabel}
-      initialValues={{ name, amount, categoryName, description }}
+      categories={[
+        { id: '1', name: 'Продукты' },
+        { id: '2', name: 'Доход' },
+      ]}
+      initialValues={{ name, amount, categoryId, description, type }}
     />
   ),
 };
@@ -54,8 +52,9 @@ export const Create: Story = {
     disabled: false,
     name: '',
     amount: '',
-    categoryName: '',
+    categoryId: '1',
     description: '',
+    type: 'Cost',
   },
 };
 
@@ -66,7 +65,8 @@ export const Edit: Story = {
     disabled: false,
     name: 'Покупка в супермаркете',
     amount: '1250',
-    categoryName: 'Продукты',
+    categoryId: '1',
     description: 'Еженедельная закупка',
+    type: 'Cost',
   },
 };
