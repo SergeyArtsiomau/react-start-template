@@ -1,6 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { OperationFormValues } from 'src/features/forms/OperationForm';
-import type { RootState } from 'src/app/store/rootReducer';
 import { createOperationId } from 'src/entities/operation/lib/createOperationId';
 import { MOCK_OPERATIONS } from 'src/entities/operation/model/mockOperations';
 import type { Operation } from 'src/entities/operation/model/types';
@@ -18,10 +17,7 @@ const formatOperationDate = (date: Date): string =>
 
 const createOperation = (values: OperationFormValues): Operation => ({
   id: createOperationId(),
-  name: values.name,
-  amount: values.amount,
-  categoryName: values.categoryName,
-  description: values.description,
+  ...values,
   date: formatOperationDate(new Date()),
 });
 
@@ -52,9 +48,5 @@ const operationsSlice = createSlice({
 });
 
 export const { addOperation, updateOperation } = operationsSlice.actions;
-
-export const selectAllOperations = (state: RootState) => state.operations.items;
-export const selectOperationById = (id: string) => (state: RootState) =>
-  state.operations.items.find((operation) => operation.id === id);
 
 export default operationsSlice.reducer;

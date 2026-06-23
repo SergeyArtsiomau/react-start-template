@@ -4,9 +4,40 @@
   padding: 32px 16px;
 }
 
+.products-page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
 .products-page__title {
-  margin: 0 0 24px;
+  margin: 0;
   font-size: 28px;
   font-weight: 700;
   color: #111827;
+}
+
+.products-page__create {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.products-page__create:hover {
+  background: #4338ca;
+}
+
+.products-page__hint {
+  margin: 0 0 24px;
+  color: #6b7280;
+  font-size: 14px;
 }

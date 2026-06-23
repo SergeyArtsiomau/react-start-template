@@ -24,7 +24,7 @@ export function SignupFormFetch() {
       if (error instanceof SignupRequestError) {
         setErrors(error.parsedErrors);
       } else {
-        setErrors({ general: ['Не удалось выполнить запрос'], email: [] });
+        setErrors({ general: ['Не удалось выполнить запрос'], email: [], password: [] });
       }
     } finally {
       setLoading(false);

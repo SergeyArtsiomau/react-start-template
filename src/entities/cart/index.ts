@@ -1,5 +1,6 @@
 export {
   addToCart,
+  clearCart,
   decrementCartItem,
   incrementCartItem,
   removeFromCart,

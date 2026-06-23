@@ -14,8 +14,8 @@ export const validateOperationForm = (values: OperationFormValues): OperationFor
     errors.amount = 'Введите корректную сумму';
   }
 
-  if (isNotDefinedString(values.categoryName)) {
-    errors.categoryName = 'Обязательное поле';
+  if (isNotDefinedString(values.categoryId)) {
+    errors.categoryId = 'Выберите категорию';
   }
 
   return errors;

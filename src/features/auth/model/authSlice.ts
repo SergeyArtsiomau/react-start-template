@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { ProfileFormValues } from 'src/features/forms/ProfileForm';
 import type { RootState } from 'src/app/store/rootReducer';
-import { createToken, parseToken } from 'src/shared/lib/tokenStorage';
+import type { ServerProfile } from 'src/shared/api/types';
 
 type AuthState = {
   token: string | null;
@@ -17,20 +17,26 @@ const initialState: AuthState = {
   isAdmin: false,
 };
 
-const createProfile = (email: string): ProfileFormValues => ({
-  name: email.split('@')[0],
-  about: '',
+const mapProfile = (profile: ServerProfile, previousAbout = ''): ProfileFormValues => ({
+  name: profile.name,
+  about: previousAbout,
 });
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setSession(state, action: PayloadAction<{ token: string; email: string; isAdmin: boolean }>) {
+    setToken(state, action: PayloadAction<string>) {
+      state.token = action.payload;
+    },
+    setSessionFromProfile(
+      state,
+      action: PayloadAction<{ token: string; profile: ServerProfile; previousAbout?: string }>
+    ) {
       state.token = action.payload.token;
-      state.email = action.payload.email;
-      state.isAdmin = action.payload.isAdmin;
-      state.profile = createProfile(action.payload.email);
+      state.email = action.payload.profile.email;
+      state.isAdmin = action.payload.profile.email.toLowerCase().startsWith('admin@');
+      state.profile = mapProfile(action.payload.profile, action.payload.previousAbout ?? state.profile?.about ?? '');
     },
     setProfile(state, action: PayloadAction<ProfileFormValues>) {
       state.profile = action.payload;
@@ -42,21 +48,12 @@ const authSlice = createSlice({
       state.isAdmin = false;
     },
     restoreSessionFromToken(state, action: PayloadAction<string>) {
-      const payload = parseToken(action.payload);
-
-      if (!payload) {
-        return;
-      }
-
       state.token = action.payload;
-      state.email = payload.email;
-      state.isAdmin = payload.role === 'admin';
-      state.profile = createProfile(payload.email);
     },
   },
 });
 
-export const { setSession, setProfile, clearSession, restoreSessionFromToken } = authSlice.actions;
+export const { setToken, setSessionFromProfile, setProfile, clearSession, restoreSessionFromToken } = authSlice.actions;
 
 export const selectToken = (state: RootState) => state.auth.token;
 export const selectEmail = (state: RootState) => state.auth.email;
@@ -65,14 +62,3 @@ export const selectIsAdmin = (state: RootState) => state.auth.isAdmin;
 export const selectIsAuthenticated = (state: RootState) => Boolean(state.auth.token);
 
 export default authSlice.reducer;
-
-export const buildSession = (email: string) => {
-  const token = createToken(email);
-  const payload = parseToken(token);
-
-  return {
-    token,
-    email,
-    isAdmin: payload?.role === 'admin',
-  };
-};
