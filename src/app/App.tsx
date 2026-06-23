@@ -1,19 +1,22 @@
 import React from 'react';
-import { AuthProvider } from 'src/features/auth';
-import { OperationsProvider } from 'src/entities/operation';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { store } from 'src/app/store';
 import { APP_BASENAME } from './config';
+import { AppInitializer } from './providers/AppInitializer';
+import { AppLoader } from './providers/AppLoader';
 import { FormsApp } from './FormsApp';
 
 function App() {
   return (
-    <AuthProvider>
-      <OperationsProvider>
+    <Provider store={store}>
+      <AppInitializer>
         <BrowserRouter basename={APP_BASENAME}>
+          <AppLoader />
           <FormsApp />
         </BrowserRouter>
-      </OperationsProvider>
-    </AuthProvider>
+      </AppInitializer>
+    </Provider>
   );
 }
 

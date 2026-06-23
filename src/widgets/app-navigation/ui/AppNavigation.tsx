@@ -21,6 +21,12 @@ export function AppNavigation({ userEmail, onLogout }: AppNavigationProps) {
       <NavLink to={ROUTES.OPERATIONS} className={getNavLinkClassName}>
         Операции
       </NavLink>
+      <NavLink to={ROUTES.PRODUCTS} className={getNavLinkClassName}>
+        Товары
+      </NavLink>
+      <NavLink to={ROUTES.CART} className={getNavLinkClassName}>
+        Корзина
+      </NavLink>
       <span className="app-navigation__user">{userEmail}</span>
       <button type="button" className="app-navigation__logout" onClick={onLogout}>
         Выйти
