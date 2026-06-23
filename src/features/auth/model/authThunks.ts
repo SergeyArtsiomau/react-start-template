@@ -31,59 +31,57 @@ export const initializeAuthThunk = createAsyncThunk('auth/initialize', async (_,
   dispatch(setInitialized());
 });
 
-export const loginThunk = createAsyncThunk<
-  void,
-  AuthFormValues,
-  { rejectValue: ParsedServerErrors }
->('auth/login', async (values, { dispatch, rejectWithValue }) => {
-  try {
-    const authResult = await dispatch(
-      api.endpoints.signin.initiate({
-        email: values.email,
-        password: values.password,
-      })
-    ).unwrap();
+export const loginThunk = createAsyncThunk<void, AuthFormValues, { rejectValue: ParsedServerErrors }>(
+  'auth/login',
+  async (values, { dispatch, rejectWithValue }) => {
+    try {
+      const authResult = await dispatch(
+        api.endpoints.signin.initiate({
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
 
-    const profile = await dispatch(api.endpoints.getProfile.initiate(undefined, { forceRefetch: true })).unwrap();
+      const profile = await dispatch(api.endpoints.getProfile.initiate(undefined, { forceRefetch: true })).unwrap();
 
-    dispatch(
-      setSessionFromProfile({
-        token: authResult.token,
-        profile,
-      })
-    );
-  } catch (error) {
-    const parsed = (error as { data?: ParsedServerErrors })?.data ?? parseServerErrors(error, 'Ошибка авторизации');
-    return rejectWithValue(parsed);
+      dispatch(
+        setSessionFromProfile({
+          token: authResult.token,
+          profile,
+        })
+      );
+    } catch (error) {
+      const parsed = (error as { data?: ParsedServerErrors })?.data ?? parseServerErrors(error, 'Ошибка авторизации');
+      return rejectWithValue(parsed);
+    }
   }
-});
+);
 
-export const registerThunk = createAsyncThunk<
-  void,
-  AuthFormValues,
-  { rejectValue: ParsedServerErrors }
->('auth/register', async (values, { dispatch, rejectWithValue }) => {
-  try {
-    const authResult = await dispatch(
-      api.endpoints.signup.initiate({
-        email: values.email,
-        password: values.password,
-      })
-    ).unwrap();
+export const registerThunk = createAsyncThunk<void, AuthFormValues, { rejectValue: ParsedServerErrors }>(
+  'auth/register',
+  async (values, { dispatch, rejectWithValue }) => {
+    try {
+      const authResult = await dispatch(
+        api.endpoints.signup.initiate({
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
 
-    const profile = await dispatch(api.endpoints.getProfile.initiate(undefined, { forceRefetch: true })).unwrap();
+      const profile = await dispatch(api.endpoints.getProfile.initiate(undefined, { forceRefetch: true })).unwrap();
 
-    dispatch(
-      setSessionFromProfile({
-        token: authResult.token,
-        profile,
-      })
-    );
-  } catch (error) {
-    const parsed = (error as { data?: ParsedServerErrors })?.data ?? parseServerErrors(error, 'Ошибка регистрации');
-    return rejectWithValue(parsed);
+      dispatch(
+        setSessionFromProfile({
+          token: authResult.token,
+          profile,
+        })
+      );
+    } catch (error) {
+      const parsed = (error as { data?: ParsedServerErrors })?.data ?? parseServerErrors(error, 'Ошибка регистрации');
+      return rejectWithValue(parsed);
+    }
   }
-});
+);
 
 export const logoutThunk = createAsyncThunk('auth/logout', async (_, { dispatch }) => {
   dispatch(clearSession());
@@ -118,34 +116,34 @@ export const syncTokenFromStorageThunk = createAsyncThunk<void, string | null, {
   }
 );
 
-export const updateProfileThunk = createAsyncThunk<
-  void,
-  ProfileFormValues,
-  { rejectValue: string; state: RootState }
->('auth/updateProfile', async (profile, { dispatch, getState, rejectWithValue }) => {
-  const token = getState().auth.token;
+export const updateProfileThunk = createAsyncThunk<void, ProfileFormValues, { rejectValue: string; state: RootState }>(
+  'auth/updateProfile',
+  async (profile, { dispatch, getState, rejectWithValue }) => {
+    const token = getState().auth.token;
 
-  if (!token) {
-    return rejectWithValue('Пользователь не авторизован');
+    if (!token) {
+      return rejectWithValue('Пользователь не авторизован');
+    }
+
+    try {
+      const updatedProfile = await dispatch(
+        api.endpoints.updateProfile.initiate({
+          name: profile.name,
+        })
+      ).unwrap();
+
+      dispatch(
+        setSessionFromProfile({
+          token,
+          profile: updatedProfile,
+          previousAbout: profile.about,
+        })
+      );
+      dispatch(setProfile(profile));
+    } catch (error) {
+      const parsed =
+        (error as { data?: ParsedServerErrors })?.data ?? parseServerErrors(error, 'Ошибка сохранения профиля');
+      return rejectWithValue(getFirstServerError(parsed) ?? 'Ошибка сохранения профиля');
+    }
   }
-
-  try {
-    const updatedProfile = await dispatch(
-      api.endpoints.updateProfile.initiate({
-        name: profile.name,
-      })
-    ).unwrap();
-
-    dispatch(
-      setSessionFromProfile({
-        token,
-        profile: updatedProfile,
-        previousAbout: profile.about,
-      })
-    );
-    dispatch(setProfile(profile));
-  } catch (error) {
-    const parsed = (error as { data?: ParsedServerErrors })?.data ?? parseServerErrors(error, 'Ошибка сохранения профиля');
-    return rejectWithValue(getFirstServerError(parsed) ?? 'Ошибка сохранения профиля');
-  }
-});
+);

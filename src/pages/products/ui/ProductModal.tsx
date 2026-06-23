@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ProductFormPanel, EMPTY_PRODUCT_FORM_VALUES, type ProductFormValues } from 'src/features/forms/ProductForm';
-import {
-  useCreateProductMutation,
-  useGetProductByIdQuery,
-  useUpdateProductMutation,
-} from 'src/shared/api/api';
+import { useCreateProductMutation, useGetProductByIdQuery, useUpdateProductMutation } from 'src/shared/api/api';
 import { useEnsureCategories } from 'src/shared/api/useEnsureCategories';
 import { getCategoryId, mapProductFormToBody, mapServerProductToFormValues } from 'src/shared/api/mappers';
 import { getFirstServerError } from 'src/shared/api/parseServerErrors';

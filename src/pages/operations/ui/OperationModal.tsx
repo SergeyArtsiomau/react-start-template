@@ -5,11 +5,7 @@ import {
   EMPTY_OPERATION_FORM_VALUES,
   type OperationFormValues,
 } from 'src/features/forms/OperationForm';
-import {
-  useCreateOperationMutation,
-  useGetOperationByIdQuery,
-  useUpdateOperationMutation,
-} from 'src/shared/api/api';
+import { useCreateOperationMutation, useGetOperationByIdQuery, useUpdateOperationMutation } from 'src/shared/api/api';
 import { useEnsureCategories } from 'src/shared/api/useEnsureCategories';
 import {
   getCategoryId,
